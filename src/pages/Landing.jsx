@@ -1,13 +1,14 @@
 import React from 'react';
-import logo from '../assets/images/logo.svg';
+import { Logo } from '../components';
 import main from '../assets/images/main.svg';
 import Wrapper from '../assets/wrappers/LandingPage';
+import { Link } from 'react-router-dom';
 
 const Landing = () => {
   return (
     <Wrapper>
       <nav>
-        <img src={logo} alt="jobster logo" className="logo" />
+        <Logo />
       </nav>
       <div className="container page">
         <div className="info">
@@ -21,7 +22,10 @@ const Landing = () => {
             Farm-to-table vexillologist vibecession DIY, biodiesel chambray
             viral cray actually meditation live-edge fanny pack.
           </p>
-          <button className="btn btn-hero">Login/Register</button>
+
+          <Link to="/register" className="btn btn-hero">
+            Login/Register
+          </Link>
         </div>
         <img src={main} alt="" className="img main-img" />
       </div>
