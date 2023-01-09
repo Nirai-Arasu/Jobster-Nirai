@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { Logo, FormRow } from '../components';
 import Wrapper from '../assets/wrappers/RegisterPage';
+import { registerUser, loginUser } from '../features/user/userSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const initialState = {
   name: '',
@@ -12,7 +15,17 @@ const initialState = {
 };
 
 const Register = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { isLoading, user } = useSelector((store) => store.user);
   const [values, setValues] = useState(initialState);
+
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, [user, navigate]);
 
   const toggleMember = () => {
     setValues({ ...values, isMember: !values.isMember });
@@ -25,7 +38,7 @@ const Register = () => {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log('trigger');
+    console.log(isLoading, user);
     const { name, email, password, isMember } = values;
 
     if (!email || !password || (!isMember && !name)) {
@@ -33,14 +46,17 @@ const Register = () => {
       toast.error('Please Fill Out All Fields');
       return;
     }
+    isMember
+      ? dispatch(loginUser({ email, password }))
+      : dispatch(registerUser({ name, email, password }));
   };
 
   return (
     <Wrapper className="full-page">
       <form className="form" onSubmit={onSubmit}>
         <Logo />
-        <h3>{values.isMember ? 'Register' : 'Login'}</h3>
-        {values.isMember && (
+        <h3>{values.isMember ? 'Login' : 'Register'}</h3>
+        {!values.isMember && (
           <FormRow
             type={'text'}
             name={'name'}
@@ -63,14 +79,14 @@ const Register = () => {
           handleChange={handleChange}
           labelText={'password'}
         />
-        <button type="submit" className="btn btn-block">
-          Submit
+        <button type="submit" className="btn btn-block" disabled={isLoading}>
+          {isLoading ? 'Loading...' : 'Submit'}
         </button>
 
         <p>
-          {values.isMember ? 'Already a member?' : 'Not a member yet?'}
+          {values.isMember ? 'Not a member yet?' : 'Already a member?'}
           <button type="button" onClick={toggleMember} className="member-btn">
-            {!values.isMember ? 'Register' : 'Login'}
+            {values.isMember ? 'Register' : 'Login'}
           </button>
         </p>
       </form>
