@@ -1,7 +1,7 @@
 import React from 'react';
-
+import Wrapper from '../../assets/wrappers/StatsContainer';
 const Stats = () => {
-  return <div>Stats</div>;
+  return <Wrapper>Stats</Wrapper>;
 };
 
 export default Stats;
