@@ -36,7 +36,7 @@ const Navbar = () => {
             <div className="dropdown show-dropdown">
               <button
                 className="dropdown-btn"
-                onClick={() => dispatch(logoutUser())}
+                onClick={() => dispatch(logoutUser('Logging out...'))}
               >
                 Logout
               </button>
