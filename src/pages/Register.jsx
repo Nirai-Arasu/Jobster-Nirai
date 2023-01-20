@@ -38,11 +38,9 @@ const Register = () => {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(isLoading, user);
     const { name, email, password, isMember } = values;
 
     if (!email || !password || (!isMember && !name)) {
-      console.log('Please Fill Out All Fields');
       toast.error('Please Fill Out All Fields');
       return;
     }

@@ -6,7 +6,6 @@ import Navlinks from './Navlinks';
 
 const BigSidebar = () => {
   const { isSidebarOpen } = useSelector((store) => store.user);
-  console.log(isSidebarOpen);
   return (
     <Wrapper>
       <div

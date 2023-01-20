@@ -62,7 +62,6 @@ const userSlice = createSlice({
     });
     builder.addCase(registerUser.rejected, (state, { payload }) => {
       state.isLoading = false;
-      console.log(state.isLoading);
       toast.error(payload);
     });
     builder.addCase(loginUser.pending, (state) => {
@@ -87,7 +86,6 @@ const userSlice = createSlice({
       state.isLoading = false;
       state.user = user;
       addUserToLocalStorage(user);
-      console.log(payload);
       toast.success('User d etails updated');
     });
     builder.addCase(updateUser.rejected, (state, { payload }) => {

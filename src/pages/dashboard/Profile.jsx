@@ -20,10 +20,8 @@ const Profile = () => {
     setDetails({ ...details, [e.target.name]: e.target.value });
   };
   const submitHandler = (e) => {
-    console.log('handler');
     e.preventDefault();
     const { name, email, lastName, location } = details;
-    console.log(details);
     if (!(name && email && lastName && location)) {
       toast.error('Please fill all the fields');
       return;
