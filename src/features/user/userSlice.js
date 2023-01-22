@@ -86,7 +86,7 @@ const userSlice = createSlice({
       state.isLoading = false;
       state.user = user;
       addUserToLocalStorage(user);
-      toast.success('User d etails updated');
+      toast.success('User details updated');
     });
     builder.addCase(updateUser.rejected, (state, { payload }) => {
       state.isLoading = false;
